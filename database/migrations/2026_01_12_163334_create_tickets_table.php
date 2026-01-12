@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('category_id')->constrained()->onDelete('cascade');
+            $table->string('title');
+            $table->text('description');
+            $table->string('location');
+            $table->string('image_path')->nullable();
+            $table->enum('status', ['Pending', 'In Progress', 'Resolved'])->default('Pending');
             $table->timestamps();
         });
     }
